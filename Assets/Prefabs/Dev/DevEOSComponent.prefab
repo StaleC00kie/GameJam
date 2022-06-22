@@ -54,6 +54,6 @@ MonoBehaviour:
   epicLoggerLevel: 200
   collectPlayerMetrics: 1
   checkForEpicLauncherAndRestart: 0
-  delayedInitialization: 0
+  delayedInitialization: 1
   platformTickIntervalInSeconds: 0
   tickBudgetInMilliseconds: 0

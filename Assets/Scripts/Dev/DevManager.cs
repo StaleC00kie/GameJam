@@ -2,12 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using EpicTransport;
+using Mirror;
+
 public class DevManager : MonoBehaviour
 {
     public static DevManager Instance;
 
-    [HideInInspector]
-    public EOSSDKComponent eOSSDKComponent;
+    [SerializeField]
+    private GameObject devNetworkManagerPrefab;
+
+    private NetworkManager devNetworkManager;
+
+    private EOSSDKComponent devEOS;
 
     void Awake()
     {
@@ -21,14 +27,17 @@ public class DevManager : MonoBehaviour
             {
                 Destroy(gameObject);
             }
-
-            eOSSDKComponent = FindObjectOfType<EOSSDKComponent>();
         }
     }
 
     public void Init(string userName)
     {
-        eOSSDKComponent.devAuthToolCredentialName = userName;
+        devNetworkManager = Instantiate(devNetworkManagerPrefab).GetComponent<NetworkManager>();
+
+
+        devEOS = devNetworkManager.GetComponent<EOSSDKComponent>();
+
+        devEOS.devAuthToolCredentialName = userName;
 
         EOSSDKComponent.Initialize();
     }
