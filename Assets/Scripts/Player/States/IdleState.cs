@@ -22,7 +22,21 @@ public class IdleState : PlayerState
 
     public override void DelayedUpdate()
     {
-        
+        Look();
+    }
+
+    public void Look()
+    {
+        mouse = inputController.lookAction.action.ReadValue<Vector2>() * inputController.mouseSensitivity * Time.deltaTime;
+
+        // Rotate camera up and down
+        xRot -= mouse.y;
+
+        xRot = Mathf.Clamp(xRot, -90f, 90f);
+        inputController.virtualCamera.transform.localEulerAngles = new Vector3(xRot, 0, 0);
+
+        // Rotate player body left and right
+        transform.Rotate(Vector3.up * mouse.x);
     }
 
     public override void PhysicsUpdate()

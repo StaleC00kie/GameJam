@@ -25,6 +25,12 @@ public class PlayerState : State
     public Vector3 velocity;
 
     [HideInInspector]
+    public Vector2 mouse;
+
+    [HideInInspector]
+    public float xRot;
+
+    [HideInInspector]
     public CharacterController controller;
     //public override void Enter()
     //{

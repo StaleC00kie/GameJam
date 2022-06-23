@@ -13,6 +13,8 @@ public class PlayerInputController : NetworkBehaviour
     public InputActionReference thrustUpAction;
     public InputActionReference thrustDownAction;
 
+    public float mouseSensitivity;
+
     private PlayerStateMachine stateMachine;
 
     [SerializeField]
@@ -21,8 +23,7 @@ public class PlayerInputController : NetworkBehaviour
     [SerializeField]
     private Camera cam;
 
-    [SerializeField]
-    private CinemachineVirtualCamera virtualCamera;
+    public CinemachineVirtualCamera virtualCamera;
 
     private void Awake()
     {
@@ -30,7 +31,6 @@ public class PlayerInputController : NetworkBehaviour
         {
             return;
         }
-
     }
 
     public void Start()
@@ -46,5 +46,8 @@ public class PlayerInputController : NetworkBehaviour
         virtualCamera.gameObject.SetActive(true);
 
         stateMachine.Init(defaultState);
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 }

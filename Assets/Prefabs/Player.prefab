@@ -301,11 +301,11 @@ GameObject:
   - component: {fileID: 4772680143976849060}
   - component: {fileID: -8728944366204991426}
   - component: {fileID: 6185194956821022498}
+  - component: {fileID: 6434662621354217592}
   - component: {fileID: 724985534710828218}
   - component: {fileID: 4403886837387523584}
   - component: {fileID: 6749875701339757281}
   - component: {fileID: 2308035789234337847}
-  - component: {fileID: 6434662621354217592}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -447,84 +447,6 @@ MonoBehaviour:
   visible: 0
   m_AssetId: 0ac0a5e03b1588b42a01c84e173859a1
   hasSpawned: 0
---- !u!114 &724985534710828218
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6367444864447583851}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9a3411225ff76d48a1267b37312838f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
---- !u!114 &4403886837387523584
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6367444864447583851}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00ef04124b5f49044b6637f50a8ae5ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  moveAction: {fileID: 6903279064933464389, guid: 6f8c50186209ea145af67194034c32a3, type: 3}
-  lookAction: {fileID: -5026455725100071197, guid: 6f8c50186209ea145af67194034c32a3, type: 3}
-  thrustUpAction: {fileID: 3387320722005996432, guid: 6f8c50186209ea145af67194034c32a3, type: 3}
-  thrustDownAction: {fileID: 0}
-  defaultState: {fileID: 6749875701339757281}
-  cam: {fileID: 1987852173496238575}
-  virtualCamera: {fileID: 2105824055405481975}
---- !u!114 &6749875701339757281
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6367444864447583851}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 065fe59ee319a524d8c9da8339715dba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  inputController: {fileID: 0}
-  stateMachine: {fileID: 0}
-  idleState: {fileID: 0}
-  moveState: {fileID: 0}
-  move: {x: 0, y: 0}
-  velocity: {x: 0, y: 0, z: 0}
-  controller: {fileID: 0}
---- !u!114 &2308035789234337847
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6367444864447583851}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be391ce87c872034c8e1157cf388407c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  inputController: {fileID: 0}
-  stateMachine: {fileID: 0}
-  idleState: {fileID: 0}
-  moveState: {fileID: 0}
-  move: {x: 0, y: 0}
-  velocity: {x: 0, y: 0, z: 0}
-  controller: {fileID: 0}
-  moveSpeed: 6
 --- !u!114 &6434662621354217592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -559,6 +481,89 @@ MonoBehaviour:
   showGizmos: 0
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+--- !u!114 &724985534710828218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6367444864447583851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9a3411225ff76d48a1267b37312838f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+--- !u!114 &4403886837387523584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6367444864447583851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00ef04124b5f49044b6637f50a8ae5ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  moveAction: {fileID: 6903279064933464389, guid: 6f8c50186209ea145af67194034c32a3, type: 3}
+  lookAction: {fileID: -5026455725100071197, guid: 6f8c50186209ea145af67194034c32a3, type: 3}
+  thrustUpAction: {fileID: 3387320722005996432, guid: 6f8c50186209ea145af67194034c32a3, type: 3}
+  thrustDownAction: {fileID: 0}
+  mouseSensitivity: 60
+  defaultState: {fileID: 6749875701339757281}
+  cam: {fileID: 1987852173496238575}
+  virtualCamera: {fileID: 2105824055405481975}
+--- !u!114 &6749875701339757281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6367444864447583851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 065fe59ee319a524d8c9da8339715dba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  inputController: {fileID: 0}
+  stateMachine: {fileID: 0}
+  idleState: {fileID: 0}
+  moveState: {fileID: 0}
+  move: {x: 0, y: 0}
+  velocity: {x: 0, y: 0, z: 0}
+  mouse: {x: 0, y: 0}
+  xRot: 0
+  controller: {fileID: 0}
+--- !u!114 &2308035789234337847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6367444864447583851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be391ce87c872034c8e1157cf388407c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  inputController: {fileID: 0}
+  stateMachine: {fileID: 0}
+  idleState: {fileID: 0}
+  moveState: {fileID: 0}
+  move: {x: 0, y: 0}
+  velocity: {x: 0, y: 0, z: 0}
+  mouse: {x: 0, y: 0}
+  xRot: 0
+  controller: {fileID: 0}
+  moveSpeed: 6
 --- !u!1 &6367444864563156232
 GameObject:
   m_ObjectHideFlags: 0
