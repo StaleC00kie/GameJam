@@ -11,16 +11,18 @@ public class PlayerMoveState : PlayerBaseState
     private bool heldMove;
 
     private bool look;
-    public override void SetupInputs()
+    public override void SetupInputs(PlayerController _playerController)
     {
-        playerControls.Player.Move.performed += Move;
-        playerControls.Player.Move.canceled += MoveCanceled;
+        playerController = _playerController;
 
-        playerControls.Player.Look.performed += Look;
+        playerController.playerControls.Player.Move.performed += Move;
+        playerController.playerControls.Player.Move.canceled += MoveCanceled;
+
+        playerController.playerControls.Player.Look.performed += Look;
     }
     public override void Enter(PlayerController _playerController)
     {
-        playerController = _playerController;
+
     }
 
     public void Move(InputAction.CallbackContext context)
@@ -43,7 +45,7 @@ public class PlayerMoveState : PlayerBaseState
 
         if (heldMove)
         {
-            playerController.move = playerControls.Player.Move.ReadValue<Vector2>() * Time.deltaTime;
+            playerController.move = playerController.playerControls.Player.Move.ReadValue<Vector2>() * Time.deltaTime;
 
             float xMove = playerController.move.x * moveSpeed;
             float zMove = playerController.move.y * moveSpeed;
@@ -68,21 +70,7 @@ public class PlayerMoveState : PlayerBaseState
             playerController.velocity.y = tempY;
         }
 
-        if(look)
-        {
-            playerController.mouse = playerControls.Player.Look.ReadValue<Vector2>() * playerController.mouseSensitivity * Time.deltaTime;
-
-            // Rotate camera up and down
-            playerController.xRot -= playerController.mouse.y;
-
-            playerController.xRot = Mathf.Clamp(playerController.xRot, -90f, 90f);
-            playerController.virtualCamera.transform.localEulerAngles = new Vector3(playerController.xRot, 0, 0);
-
-            // Rotate player body left and right
-            transform.Rotate(Vector3.up * playerController.mouse.x);
-
-            look = false;
-        }
+        transform.eulerAngles = new Vector3(transform.rotation.x, playerController.playerCamera.transform.eulerAngles.y, transform.rotation.z);
 
         playerController.cc.Move(playerController.velocity);
     }
@@ -94,6 +82,7 @@ public class PlayerMoveState : PlayerBaseState
 
     public override void DelayedUpdate(PlayerController _playerController)
     {
+
 
     }
 

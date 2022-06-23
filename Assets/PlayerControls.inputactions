@@ -1,5 +1,5 @@
 {
-    "name": "GameJamController",
+    "name": "PlayerControls",
     "maps": [
         {
             "name": "Player",

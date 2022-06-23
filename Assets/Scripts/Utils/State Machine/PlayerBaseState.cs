@@ -6,27 +6,19 @@ using Mirror;
 public class PlayerBaseState : NetworkBehaviour
 {
     [HideInInspector]
-    public PlayerControls playerControls;
-
-    [HideInInspector]
     public PlayerController playerController;
 
-    public void Awake()
+    public void Start()
     {
-        playerControls = new PlayerControls();
+        if(!isLocalPlayer)
+        {
+            return;
+        }
+
+
     }
 
-    public void OnEnable()
-    {
-        playerControls.Enable();
-    }
-
-    public void OnDisable()
-    {
-        playerControls.Disable();
-    }
-
-    public virtual void SetupInputs()
+    public virtual void SetupInputs(PlayerController _playerController)
     {
 
     }

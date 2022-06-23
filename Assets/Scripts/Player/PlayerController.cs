@@ -19,7 +19,16 @@ public class PlayerController : NetworkBehaviour
     public float xRot;
 
     [HideInInspector]
+    public float yRot;
+
+    [HideInInspector]
     public CharacterController cc;
+
+    [HideInInspector]
+    public PlayerControls playerControls;
+
+    [HideInInspector]
+    public Transform orientation;
 
     public CinemachineVirtualCamera virtualCamera;
     public Camera playerCamera;
@@ -28,6 +37,31 @@ public class PlayerController : NetworkBehaviour
 
     public float mouseSensitivity;
 
+
+    public override void OnStartLocalPlayer()
+    {
+        playerControls = new PlayerControls();
+
+        playerControls.Enable();
+
+        cc = GetComponent<CharacterController>();
+
+        virtualCamera.gameObject.SetActive(true);
+        playerCamera.gameObject.SetActive(true);
+
+        virtualCamera.transform.parent = null;
+        playerCamera.transform.parent = null;
+
+        Cursor.lockState = CursorLockMode.Locked;
+
+    }
+
+    public override void OnStopLocalPlayer()
+    {
+        playerControls.Disable();
+    }
+
+
     public void Start()
     {
         if(!isLocalPlayer)
@@ -35,11 +69,20 @@ public class PlayerController : NetworkBehaviour
             return;
         }
 
-        cc = GetComponent<CharacterController>();
+    }
 
-        virtualCamera.gameObject.SetActive(true);
-        playerCamera.gameObject.SetActive(true);
+    public void OnEnable()
+    {
 
-        Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    public void OnDisable()
+    {
+        if (!isLocalPlayer)
+        {
+            return;
+        }
+
+
     }
 }

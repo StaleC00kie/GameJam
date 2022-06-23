@@ -10,6 +10,8 @@ public class PlayerStateManager : NetworkBehaviour
 
     public PlayerMoveState playerMoveState;
 
+
+
     public void Awake()
     {
         if(!isLocalPlayer)
@@ -18,7 +20,6 @@ public class PlayerStateManager : NetworkBehaviour
         }
 
 
-        playerMoveState = GetComponent<PlayerMoveState>();
 
     }
 
@@ -28,11 +29,16 @@ public class PlayerStateManager : NetworkBehaviour
         {
             return;
         }
+
+
+        playerMoveState = GetComponent<PlayerMoveState>();
+
         playerController = GetComponent<PlayerController>();
 
         // Default state
         currentState = playerMoveState;
-        currentState.SetupInputs();
+
+        currentState.SetupInputs(playerController);
 
         currentState.Enter(playerController);
     }
