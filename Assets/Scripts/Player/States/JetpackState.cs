@@ -1,18 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(CharacterController))]
-[RequireComponent(typeof(PlayerState))]
-public class MoveState : PlayerState
+public class JetpackState : PlayerState
 {
     public float moveSpeed;
 
-    public float upwardThrustSpeed;
+    public float jetpackForce;
 
-
+    private bool held = false;
     public override void Enter()
     {
 
@@ -20,33 +16,17 @@ public class MoveState : PlayerState
 
     public override void LogicUpdate()
     {
-        if(controller.isGrounded && inputController.velocity.y < 0)
+        CheckStateChange();
+        if (controller.isGrounded && inputController.velocity.y < 0)
         {
             inputController.velocity.y = -2.0f;
         }
 
         Move();
-
-        controller.Move(inputController.velocity * Time.deltaTime);
-
+        Jetpack();
         Gravity();
 
-        controller.Move(new Vector3(0, inputController.velocity.y, 0) * Time.deltaTime);
-
-        CheckStateChange();
-    }
-
-    public void CheckStateChange()
-    {
-        if(inputController.move == Vector2.zero)
-        {
-            stateMachine.ChangeState(idleState);
-        }
-
-        if (controller.isGrounded && inputController.jetpackUpAction.action.triggered)
-        {
-            stateMachine.ChangeState(jetpackState);
-        }
+        controller.Move(inputController.velocity * Time.deltaTime);
     }
 
     public void Move()
@@ -63,14 +43,32 @@ public class MoveState : PlayerState
         inputController.velocity.y = temp;
     }
 
+    public void Jetpack()
+    {
+
+        if (held)
+        {
+            inputController.velocity.y += jetpackForce;
+        }
+
+        //controller.Move(new Vector3(0, inputController.velocity.y, 0));
+    }
+
     public void Gravity()
     {
         inputController.velocity.y += inputController.gravity * Time.deltaTime;
     }
 
-    public void StopThrustUp()
+    public void CheckStateChange()
     {
-
+        if(controller.isGrounded && inputController.move == Vector2.zero)
+        {
+            stateMachine.ChangeState(idleState);
+        }
+        else if (controller.isGrounded && inputController.move != Vector2.zero)
+        {
+            stateMachine.ChangeState(moveState);
+        }
     }
 
     public override void DelayedUpdate()

@@ -306,6 +306,7 @@ GameObject:
   - component: {fileID: 4403886837387523584}
   - component: {fileID: 6749875701339757281}
   - component: {fileID: 2308035789234337847}
+  - component: {fileID: 943716825274247281}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -423,7 +424,7 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 2
+  m_Height: 2.1
   m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.3
@@ -511,12 +512,17 @@ MonoBehaviour:
   syncInterval: 0.1
   moveAction: {fileID: 6903279064933464389, guid: 6f8c50186209ea145af67194034c32a3, type: 3}
   lookAction: {fileID: -5026455725100071197, guid: 6f8c50186209ea145af67194034c32a3, type: 3}
-  thrustUpAction: {fileID: 3387320722005996432, guid: 6f8c50186209ea145af67194034c32a3, type: 3}
+  jetpackUpAction: {fileID: 3387320722005996432, guid: 6f8c50186209ea145af67194034c32a3, type: 3}
   thrustDownAction: {fileID: 0}
   mouseSensitivity: 60
   defaultState: {fileID: 6749875701339757281}
   cam: {fileID: 1987852173496238575}
   virtualCamera: {fileID: 2105824055405481975}
+  gravity: -19.21
+  move: {x: 0, y: 0}
+  velocity: {x: 0, y: 0, z: 0}
+  mouse: {x: 0, y: 0}
+  xRot: 0
 --- !u!114 &6749875701339757281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -535,10 +541,7 @@ MonoBehaviour:
   stateMachine: {fileID: 0}
   idleState: {fileID: 0}
   moveState: {fileID: 0}
-  move: {x: 0, y: 0}
-  velocity: {x: 0, y: 0, z: 0}
-  mouse: {x: 0, y: 0}
-  xRot: 0
+  jetpackState: {fileID: 0}
   controller: {fileID: 0}
 --- !u!114 &2308035789234337847
 MonoBehaviour:
@@ -558,12 +561,32 @@ MonoBehaviour:
   stateMachine: {fileID: 0}
   idleState: {fileID: 0}
   moveState: {fileID: 0}
-  move: {x: 0, y: 0}
-  velocity: {x: 0, y: 0, z: 0}
-  mouse: {x: 0, y: 0}
-  xRot: 0
+  jetpackState: {fileID: 0}
   controller: {fileID: 0}
   moveSpeed: 6
+  upwardThrustSpeed: 5
+--- !u!114 &943716825274247281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6367444864447583851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f87c97c864b108a448fc1b3821d7ac5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  inputController: {fileID: 0}
+  stateMachine: {fileID: 0}
+  idleState: {fileID: 0}
+  moveState: {fileID: 0}
+  jetpackState: {fileID: 0}
+  controller: {fileID: 0}
+  moveSpeed: 6
+  jetpackForce: 5
 --- !u!1 &6367444864563156232
 GameObject:
   m_ObjectHideFlags: 0

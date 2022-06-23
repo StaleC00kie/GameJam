@@ -6,6 +6,7 @@ using Utilities;
 [RequireComponent(typeof(PlayerInputController))]
 public class PlayerState : State
 {
+
     [HideInInspector]
     public PlayerInputController inputController;
 
@@ -19,43 +20,11 @@ public class PlayerState : State
     public MoveState moveState;
 
     [HideInInspector]
-    public Vector2 move;
+    public JetpackState jetpackState;
 
-    [HideInInspector]
-    public Vector3 velocity;
-
-    [HideInInspector]
-    public Vector2 mouse;
-
-    [HideInInspector]
-    public float xRot;
 
     [HideInInspector]
     public CharacterController controller;
-    //public override void Enter()
-    //{
-    //    base.Enter();
-    //}
-
-    //public override void LogicUpdate()
-    //{
-    //    base.LogicUpdate();
-    //}
-
-    //public override void DelayedUpdate()
-    //{
-    //    base.DelayedUpdate();
-    //}
-
-    //public override void PhysicsUpdate()
-    //{
-    //    base.PhysicsUpdate();
-    //}
-
-    //public override void Exit()
-    //{
-    //    base.Exit();
-    //}
 
     public void Awake()
     {
@@ -64,8 +33,18 @@ public class PlayerState : State
 
         idleState = GetComponent<IdleState>();
         moveState = GetComponent<MoveState>();
+        jetpackState = GetComponent<JetpackState>();
 
         controller = GetComponent<CharacterController>();
+    }
+
+    private void OnEnable()
+    {
+        inputController = GetComponent<PlayerInputController>();
+    }
+    private void OnDisable()
+    {
+        
     }
 
 
