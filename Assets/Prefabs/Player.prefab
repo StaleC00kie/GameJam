@@ -302,11 +302,9 @@ GameObject:
   - component: {fileID: -8728944366204991426}
   - component: {fileID: 6185194956821022498}
   - component: {fileID: 6434662621354217592}
-  - component: {fileID: 724985534710828218}
-  - component: {fileID: 4403886837387523584}
-  - component: {fileID: 6749875701339757281}
-  - component: {fileID: 2308035789234337847}
-  - component: {fileID: 943716825274247281}
+  - component: {fileID: 6700370880631645467}
+  - component: {fileID: 1897305019631574304}
+  - component: {fileID: 5514844950980915892}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -482,7 +480,7 @@ MonoBehaviour:
   showGizmos: 0
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
---- !u!114 &724985534710828218
+--- !u!114 &6700370880631645467
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -491,39 +489,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 6367444864447583851}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9a3411225ff76d48a1267b37312838f, type: 3}
+  m_Script: {fileID: 11500000, guid: 4f2300e7d9478c24989b905df0ac7449, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
---- !u!114 &4403886837387523584
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6367444864447583851}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00ef04124b5f49044b6637f50a8ae5ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  moveAction: {fileID: 6903279064933464389, guid: 6f8c50186209ea145af67194034c32a3, type: 3}
-  lookAction: {fileID: -5026455725100071197, guid: 6f8c50186209ea145af67194034c32a3, type: 3}
-  jetpackUpAction: {fileID: 3387320722005996432, guid: 6f8c50186209ea145af67194034c32a3, type: 3}
-  thrustDownAction: {fileID: 0}
-  mouseSensitivity: 60
-  defaultState: {fileID: 6749875701339757281}
-  cam: {fileID: 1987852173496238575}
-  virtualCamera: {fileID: 2105824055405481975}
-  gravity: -19.21
   move: {x: 0, y: 0}
-  velocity: {x: 0, y: 0, z: 0}
   mouse: {x: 0, y: 0}
+  velocity: {x: 0, y: 0, z: 0}
   xRot: 0
---- !u!114 &6749875701339757281
+  cc: {fileID: 0}
+  virtualCamera: {fileID: 2105824055405481975}
+  playerCamera: {fileID: 1987852173496238575}
+  gravity: -19.62
+  mouseSensitivity: 30
+--- !u!114 &1897305019631574304
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -532,18 +512,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 6367444864447583851}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 065fe59ee319a524d8c9da8339715dba, type: 3}
+  m_Script: {fileID: 11500000, guid: 682b02a0802962f48b45ec30e415b76c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  inputController: {fileID: 0}
-  stateMachine: {fileID: 0}
-  idleState: {fileID: 0}
-  moveState: {fileID: 0}
-  jetpackState: {fileID: 0}
-  controller: {fileID: 0}
---- !u!114 &2308035789234337847
+  playerMoveState: {fileID: 5514844950980915892}
+--- !u!114 &5514844950980915892
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -552,41 +527,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 6367444864447583851}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be391ce87c872034c8e1157cf388407c, type: 3}
+  m_Script: {fileID: 11500000, guid: 31652857119472b468f6b9f296cc24da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  inputController: {fileID: 0}
-  stateMachine: {fileID: 0}
-  idleState: {fileID: 0}
-  moveState: {fileID: 0}
-  jetpackState: {fileID: 0}
-  controller: {fileID: 0}
-  moveSpeed: 6
-  upwardThrustSpeed: 5
---- !u!114 &943716825274247281
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6367444864447583851}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f87c97c864b108a448fc1b3821d7ac5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  inputController: {fileID: 0}
-  stateMachine: {fileID: 0}
-  idleState: {fileID: 0}
-  moveState: {fileID: 0}
-  jetpackState: {fileID: 0}
-  controller: {fileID: 0}
-  moveSpeed: 6
-  jetpackForce: 5
+  playerController: {fileID: 0}
+  moveSpeed: 5
 --- !u!1 &6367444864563156232
 GameObject:
   m_ObjectHideFlags: 0
