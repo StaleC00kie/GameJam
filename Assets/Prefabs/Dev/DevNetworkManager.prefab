@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3524990196848976872}
   - component: {fileID: -5970598409880737593}
   - component: {fileID: 1144402277799598269}
-  - component: {fileID: 2354727375004214720}
   - component: {fileID: 4168222533273097947}
   m_Layer: 0
   m_Name: DevNetworkManager
@@ -54,10 +53,10 @@ MonoBehaviour:
   onlineScene: Assets/Scenes/LobbyScene.unity
   transport: {fileID: 1144402277799598269}
   networkAddress: localhost
-  maxConnections: 2
+  maxConnections: 4
   authenticator: {fileID: 0}
   playerPrefab: {fileID: 6367444864447583851, guid: 0ac0a5e03b1588b42a01c84e173859a1, type: 3}
-  autoCreatePlayer: 1
+  autoCreatePlayer: 0
   playerSpawnMethod: 0
   spawnPrefabs: []
   showRoomGUI: 0
@@ -85,32 +84,6 @@ MonoBehaviour:
   maxFragments: 55
   ignoreCachedMessagesAtStartUpInSeconds: 2
   relayControl: 1
---- !u!114 &2354727375004214720
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1552564779483510392}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09c2b9adb023e6547aa45a0e8bf5fcfc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  apiKeys: {fileID: 11400000, guid: a424444bc87a33648a298437de6b52f5, type: 2}
-  authInterfaceLogin: 1
-  authInterfaceCredentialType: 4
-  devAuthToolPort: 7878
-  devAuthToolCredentialName: 
-  connectInterfaceCredentialType: 0
-  deviceModel: PC Windows 64bit
-  displayName: User
-  epicLoggerLevel: 200
-  collectPlayerMetrics: 1
-  checkForEpicLauncherAndRestart: 0
-  delayedInitialization: 1
-  platformTickIntervalInSeconds: 0
-  tickBudgetInMilliseconds: 0
 --- !u!114 &4168222533273097947
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1395638532071860816}
   - component: {fileID: 1395638532071860817}
+  - component: {fileID: -1708089473012856580}
   m_Layer: 0
   m_Name: DevEOSComponent
   m_TagString: Untagged
@@ -25,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1395638532071860818}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.047198057, y: -7.693221, z: 9.459104}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -52,8 +53,20 @@ MonoBehaviour:
   deviceModel: PC Windows 64bit
   displayName: User
   epicLoggerLevel: 200
-  collectPlayerMetrics: 1
+  collectPlayerMetrics: 0
   checkForEpicLauncherAndRestart: 0
   delayedInitialization: 1
   platformTickIntervalInSeconds: 0
   tickBudgetInMilliseconds: 0
+--- !u!114 &-1708089473012856580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1395638532071860818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6324e91abd1a9e4a936285ba1f8eb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -11,6 +11,9 @@ public class DevManager : MonoBehaviour
     [SerializeField]
     private GameObject devNetworkManagerPrefab;
 
+    [SerializeField]
+    private GameObject devEOSPrefab;
+
     private NetworkManager devNetworkManager;
 
     private EOSSDKComponent devEOS;
@@ -32,10 +35,11 @@ public class DevManager : MonoBehaviour
 
     public void Init(string userName)
     {
+
+        devEOS = Instantiate(devEOSPrefab).GetComponent<EOSSDKComponent>();
+
         devNetworkManager = Instantiate(devNetworkManagerPrefab).GetComponent<NetworkManager>();
 
-
-        devEOS = devNetworkManager.GetComponent<EOSSDKComponent>();
 
         devEOS.devAuthToolCredentialName = userName;
 
