@@ -5,10 +5,13 @@ using Mirror;
 
 public class PlayerStateManager : NetworkBehaviour
 {
-    private PlayerBaseState currentState;
+    public PlayerBaseState currentState;
     private PlayerController playerController;
 
+    [HideInInspector]
     public PlayerMoveState playerMoveState;
+    [HideInInspector]
+    public PlayerJetpackState playerJetpackState;
 
 
 
@@ -18,9 +21,6 @@ public class PlayerStateManager : NetworkBehaviour
         {
             return;
         }
-
-
-
     }
 
     private void Start()
@@ -30,8 +30,9 @@ public class PlayerStateManager : NetworkBehaviour
             return;
         }
 
-
         playerMoveState = GetComponent<PlayerMoveState>();
+        playerJetpackState = GetComponent<PlayerJetpackState>();
+
 
         playerController = GetComponent<PlayerController>();
 
@@ -49,6 +50,8 @@ public class PlayerStateManager : NetworkBehaviour
         {
             return;
         }
+
+        currentState.CheckStateTransitions(this);
 
         currentState.LogicUpdate(playerController);
     }
@@ -70,8 +73,10 @@ public class PlayerStateManager : NetworkBehaviour
             return;
         }
 
+        currentState.RemoveInputs();
         currentState.Exit(playerController);
         currentState = state;
+        currentState.SetupInputs(playerController);
         currentState.Enter(playerController);
     }
 }

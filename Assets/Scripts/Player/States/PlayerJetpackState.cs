@@ -3,22 +3,37 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMoveState : PlayerBaseState
+public class PlayerJetpackState : PlayerBaseState
 {
     [SerializeField]
     private float moveSpeed = 5;
+
+    private bool heldMove;
+
+    [SerializeField]
+    private float jetpackAcceleration = 1.0f; //accelerates n units per second, per second
+
+    [SerializeField]
+    public float maxJetpackVelocity = 5.0f;
+
     public override void SetupInputs(PlayerController _playerController)
     {
         playerController = _playerController;
     }
+
     public override void Enter(PlayerController _playerController)
     {
 
     }
-
     public override void LogicUpdate(PlayerController _playerController)
     {
-        Gravity();
+        playerController.velocity.y += jetpackAcceleration * Time.deltaTime;
+
+        if(playerController.velocity.y > maxJetpackVelocity)
+        {
+            playerController.velocity.y = maxJetpackVelocity;
+        }
+
 
         // WASD Movement
         playerController.move = playerController.playerControls.Player.Move.ReadValue<Vector2>();
@@ -63,9 +78,9 @@ public class PlayerMoveState : PlayerBaseState
 
     public override void CheckStateTransitions(PlayerStateManager stateMachine)
     {
-        if (playerController.playerControls.Player.Jump.triggered)
+        if (playerController.playerControls.Player.Jump.phase == InputActionPhase.Waiting)
         {
-            stateMachine.ChangeState(stateMachine.playerJetpackState);
+            stateMachine.ChangeState(stateMachine.playerMoveState);
         }
     }
 

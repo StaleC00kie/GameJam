@@ -23,6 +23,11 @@ public class PlayerBaseState : NetworkBehaviour
 
     }
 
+    public virtual void RemoveInputs()
+    {
+
+    }
+
     public virtual void Enter(PlayerController _playerController)
     {
 
@@ -45,12 +50,12 @@ public class PlayerBaseState : NetworkBehaviour
     {
 
     }
-    public virtual void Exit(PlayerController _playerController)
+
+    public virtual void CheckStateTransitions(PlayerStateManager stateMachine)
     {
 
     }
-
-    public void GetInput()
+    public virtual void Exit(PlayerController _playerController)
     {
 
     }

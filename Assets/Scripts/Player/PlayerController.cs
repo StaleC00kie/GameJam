@@ -12,7 +12,6 @@ public class PlayerController : NetworkBehaviour
     [HideInInspector]
     public Vector2 mouse;
 
-    [HideInInspector]
     public Vector3 velocity;
 
     [HideInInspector]
