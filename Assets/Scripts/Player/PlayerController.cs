@@ -67,7 +67,6 @@ public class PlayerController : NetworkBehaviour
         {
             return;
         }
-
     }
 
     public void OnEnable()
@@ -81,7 +80,5 @@ public class PlayerController : NetworkBehaviour
         {
             return;
         }
-
-
     }
 }
