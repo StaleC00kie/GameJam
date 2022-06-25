@@ -2,11 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-
+using DG.Tweening;
 public class DevMainMenu : MonoBehaviour
 {
     [SerializeField]
     private TMP_InputField userNameField;
+
+    private void Start()
+    {
+        DOTween.Init(false, true);
+    }
 
     public void OnLoginClicked()
     {

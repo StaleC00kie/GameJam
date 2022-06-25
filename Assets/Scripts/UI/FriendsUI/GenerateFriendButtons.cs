@@ -10,29 +10,60 @@ using Epic.OnlineServices.UserInfo;
 using EpicTransport;
 using System;
 using UnityEngine.UI;
+using Epic.OnlineServices.Lobby;
+using Mirror;
 
-public class FriendsUI : MonoBehaviour
+public class GenerateFriendButtons : MonoBehaviour
 {
     [SerializeField]
     private GameObject friendButtonPrefab;
 
+    private Lobby lobby;
+    private NetworkRoomManager networkRoomManager;
+
     private GridLayoutGroup gridLayoutGroup;
 
     private RectTransform contentTransform;
+
+    private float searchLobbiesDelay = 10;
+
+    private float searchLobbiesTimer;
+
+    private FriendsInterface friendsInterface;
+
+    private int friendsCount = 0;
 
     private void Awake()
     {
         gridLayoutGroup = GetComponent<GridLayoutGroup>();
 
         contentTransform = GetComponent<RectTransform>();
+
+        lobby = FindObjectOfType<Lobby>();
+
+        friendsInterface = EOSSDKComponent.GetFriendsInterface();
+    }
+    public void Update()
+    {
+        searchLobbiesTimer += Time.deltaTime;
+
+        if (searchLobbiesTimer >= searchLobbiesDelay)
+        {
+            searchLobbiesTimer = 0;
+            
+            SearchForFriends();
+
+            SearchForLobbies();
+        }
     }
 
-    public void Start()
+    public void SearchForLobbies()
     {
+        lobby.FindLobbies((uint)friendsCount);
+    }
 
-        FriendsInterface friendsInterface = EOSSDKComponent.GetFriendsInterface();
-
-
+    public void SearchForFriends()
+    {
         QueryFriendsOptions queryFriendsOptions = new QueryFriendsOptions
         {
             LocalUserId = EOSSDKComponent.LocalUserAccountId,
@@ -43,15 +74,12 @@ public class FriendsUI : MonoBehaviour
 
     private void OnFoundFriendsCallback(QueryFriendsCallbackInfo data)
     {
-        FriendsInterface friendsInterface = EOSSDKComponent.GetFriendsInterface();
-
-
         GetFriendsCountOptions options = new GetFriendsCountOptions()
         {
             LocalUserId = EOSSDKComponent.LocalUserAccountId,
         };
 
-        int friendsCount = friendsInterface.GetFriendsCount(options);
+        friendsCount = friendsInterface.GetFriendsCount(options);
 
         for (int i = 0; i < friendsCount; i++)
         {
@@ -61,10 +89,6 @@ public class FriendsUI : MonoBehaviour
                 Index = i,
                 LocalUserId = EOSSDKComponent.LocalUserAccountId,
             };
-
-            Button button = Instantiate(friendButtonPrefab, transform).GetComponent<Button>();
-
-            button.onClick.AddListener(() => OnClicked(friendsInterface.GetFriendAtIndex(getFriendAtIndexOptions)));
 
             UserInfoInterface userInfoInterface = EOSSDKComponent.GetUserInfoInterface();
 
@@ -83,26 +107,34 @@ public class FriendsUI : MonoBehaviour
                 TargetUserId = friendsInterface.GetFriendAtIndex(getFriendAtIndexOptions),
             };
 
-
             UserInfoData userInfoData;
 
             userInfoInterface.CopyUserInfo(copyUserInfoOptions, out userInfoData);
 
+            // Create Button
+            Button button = Instantiate(friendButtonPrefab, transform).GetComponent<Button>();
+
+            button.onClick.AddListener(() => OnClicked(lobby.foundLobbies[i]));
+
+            // Set button text to username
             button.GetComponentInChildren<TextMeshProUGUI>().text = userInfoData.DisplayName;
 
+            // Resize the content holder to allow scrolling
             contentTransform.sizeDelta += new Vector2(0, gridLayoutGroup.cellSize.y);
         }
 
         
     }
 
-    public void OnClicked(EpicAccountId id)
+    public void OnClicked(LobbyDetails lobbyDetails)
     {
-
+        lobby.JoinLobby(lobbyDetails);
     }
 
     public void QueryUserInfoCallback(QueryUserInfoCallbackInfo data)
     {
 
     }
+
+
 }

@@ -134,6 +134,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DevManager
       objectReference: {fileID: 0}
+    - target: {fileID: 1903451157318067248, guid: 18b89381eaa28cf42b2a2ef6c1a8681c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4542720416764965280, guid: 18b89381eaa28cf42b2a2ef6c1a8681c, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -597,6 +601,10 @@ PrefabInstance:
     - target: {fileID: 4353737590775381974, guid: 6c58ee62b7a41c84a932245b08991b39, type: 3}
       propertyPath: m_Name
       value: DevMainMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 4353737590775381974, guid: 6c58ee62b7a41c84a932245b08991b39, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4793796714873501918, guid: 6c58ee62b7a41c84a932245b08991b39, type: 3}
       propertyPath: m_RootOrder
