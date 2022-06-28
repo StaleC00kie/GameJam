@@ -23,7 +23,7 @@ public class DevMainMenu : MonoBehaviour
 
         if(userNameField != null)
         {
-            DevManager.Instance.Init(userNameField.text);
+            //DevManager.Instance.Init(userNameField.text);
             gameObject.SetActive(false);
         }
         else

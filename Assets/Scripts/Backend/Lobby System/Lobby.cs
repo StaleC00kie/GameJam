@@ -6,14 +6,45 @@ using Epic.OnlineServices.Lobby;
 
 public class Lobby : EOSLobby
 {
+    #region Public Fields
+
+    [HideInInspector]
+    public List<LobbyDetails> foundLobbies = new List<LobbyDetails>();
+
+    #endregion
+
+    #region Private Fields
     private List<Attribute> lobbyData = new List<Attribute>();
-    private List<LobbyDetails> foundLobbies = new List<LobbyDetails>();
 
-    private NetworkManager networkManager;
 
+    private string lobbyName = "LobbyName";
+
+    private NetworkRoomManager networkRoomManager;
+
+    private bool lobbyExists;
+
+    #endregion
+
+    #region Mono Behaviour Methods
     private void Awake()
     {
-        networkManager = GetComponent<NetworkManager>();
+        networkRoomManager = FindObjectOfType<NetworkRoomManager>();
+    }
+
+    public override void Start()
+    {
+        base.Start();
+
+
+    }
+
+    public void Create()
+    {
+        CreateLobby((uint)networkRoomManager.maxConnections,
+            LobbyPermissionLevel.Joinviapresence,
+            true,
+            new AttributeData[] { new AttributeData { Key = AttributeKeys[0], Value = lobbyName },
+            });
     }
 
     private void OnEnable()
@@ -34,17 +65,22 @@ public class Lobby : EOSLobby
         LeaveLobbySucceeded -= OnLeaveLobbySuccess;
     }
 
+    #endregion
+
+    #region Epic Online Services Callbacks
+
     private void OnCreateLobbySuccess(List<Attribute> attributes)
     {
         lobbyData = attributes;
-        networkManager.StartHost();
+        Debug.Log("Created Lobby Successfully");
+        networkRoomManager.StartHost();
     }
 
     private void OnJoinLobbySuccess(List<Attribute> attributes)
     {
         lobbyData = attributes;
-        networkManager.networkAddress = attributes.Find((x) => x.Data.Key == hostAddressKey).Data.Value.AsUtf8;
-        networkManager.StartClient();
+        networkRoomManager.networkAddress = attributes.Find((x) => x.Data.Key == hostAddressKey).Data.Value.AsUtf8;
+        networkRoomManager.StartClient();
     }
 
     private void OnFindLobbiesSuccess(List<LobbyDetails> lobbiesFound)
@@ -54,7 +90,9 @@ public class Lobby : EOSLobby
 
     private void OnLeaveLobbySuccess()
     {
-        networkManager.StopHost();
-        networkManager.StopClient();
+        networkRoomManager.StopHost();
+        networkRoomManager.StopClient();
     }
+
+    #endregion
 }
