@@ -71,7 +71,7 @@ public class GenerateFriendButtons : MonoBehaviour
         //friendsInterface.QueryFriends(queryFriendsOptions, null, OnFoundFriendsCallback);
 
 
-        E//OSFriendUtils.GetOnlineFriendsCount((int i) => friendCounter.text = i.ToString());
+        //EOSFriendUtils.GetOnlineFriendsCount((int i) => friendCounter.text = i.ToString());
 
         // TODO: Wrap this up in EOSFriendUtils
 
