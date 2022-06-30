@@ -2,14 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using Epic;
-using Epic.OnlineServices.Friends;
-using Epic.OnlineServices.UserInfo;
-using EpicTransport;
 using UnityEngine.UI;
-using Epic.OnlineServices.Lobby;
 using Mirror;
-using Utils.EOSFriends;
+using Steamworks;
 
 public class GenerateFriendButtons : MonoBehaviour
 {
@@ -21,22 +16,9 @@ public class GenerateFriendButtons : MonoBehaviour
 
     #region Private Fields
 
-    private NetworkRoomManager networkRoomManager;
-
     private GridLayoutGroup gridLayoutGroup;
 
     private RectTransform contentTransform;
-
-    private FriendsInterface friendsInterface;
-
-    private int friendsCount = 0;
-
-    private UserInfoData userInfoData;
-
-    #endregion
-
-    #region Events & Delegates
-
 
     #endregion
 
@@ -46,109 +28,46 @@ public class GenerateFriendButtons : MonoBehaviour
         gridLayoutGroup = GetComponent<GridLayoutGroup>();
 
         contentTransform = GetComponent<RectTransform>();
-
-        friendsInterface = EOSSDKComponent.GetFriendsInterface();
     }
 
-    private void OnDisable()
+    public void Start()
     {
-        
+        CreateButtons();
     }
+
     #endregion
 
     #region Public Methods
 
     public void CreateButtons()
     {
-        BindEvents();
-
-        //QueryFriendsOptions queryFriendsOptions = new QueryFriendsOptions
-        //{
-        //    LocalUserId = EOSSDKComponent.LocalUserAccountId,
-        //};
-
-        //// Read user's friends list and cache it for future use in the OnFoundFriendsCallback callback.
-        //friendsInterface.QueryFriends(queryFriendsOptions, null, OnFoundFriendsCallback);
-
-
-        //EOSFriendUtils.GetOnlineFriendsCount((int i) => friendCounter.text = i.ToString());
-
-        // TODO: Wrap this up in EOSFriendUtils
-
-        for (int i = 0; i < friendsCount; i++)
+        foreach (Friend friend in SteamFriends.GetFriends())
         {
-            GetFriendAtIndexOptions getFriendAtIndexOptions = new GetFriendAtIndexOptions()
+            if(friend.IsOnline)
             {
-                Index = i,
-                LocalUserId = EOSSDKComponent.LocalUserAccountId,
-            };
+                // Create a button
+                Button button = Instantiate(friendButtonPrefab, transform).GetComponent<Button>();
 
-            UserInfoInterface userInfoInterface = EOSSDKComponent.GetUserInfoInterface();
+                //button.onClick.AddListener(() => OnClicked(lobby.foundLobbies[0]));
 
+                // Set button's text to friend's display name
+                button.GetComponent<FriendButton>().usernameText.text = friend.Name;
 
-            QueryUserInfoOptions queryUserInfoOptions = new QueryUserInfoOptions()
-            {
-                LocalUserId = EOSSDKComponent.LocalUserAccountId,
-                TargetUserId = friendsInterface.GetFriendAtIndex(getFriendAtIndexOptions),
-            };
-
-            userInfoInterface.QueryUserInfo(queryUserInfoOptions, null, QueryUserInfoCallback);
+                // Resize the content holder to allow scrolling
+                contentTransform.sizeDelta += new Vector2(0, gridLayoutGroup.cellSize.y);
+            }
         }
     }
 
-    public void OnClicked(LobbyDetails lobbyDetails)
+    public void OnClicked()
     {
         //lobby.JoinLobby(lobbyDetails);
-    }
-
-    public void QueryUserInfoCallback(QueryUserInfoCallbackInfo data)
-    {
-        UserInfoInterface userInfoInterface = EOSSDKComponent.GetUserInfoInterface();
-
-        CopyUserInfoOptions copyUserInfoOptions = new CopyUserInfoOptions
-        {
-            LocalUserId = EOSSDKComponent.LocalUserAccountId,
-            TargetUserId = data.TargetUserId,
-        };
-
-
-        userInfoInterface.CopyUserInfo(copyUserInfoOptions, out userInfoData);
-
-
-        LobbyManager.Instance.SearchForLobbies(100);
     }
 
     #endregion
 
     #region Private Methods
-    public void BindEvents()
-    {
-        LobbyManager.Instance.lobby.FindLobbiesSucceeded += FindLobbiesSuccess;
 
-        EOSFriendUtils.OnGetOnlineFriendsCountCallback += OnFoundFriendsCallback;
-    }
-
-    private void FindLobbiesSuccess(List<LobbyDetails> foundLobbies)
-    {
-        // Create a button
-        Button button = Instantiate(friendButtonPrefab, transform).GetComponent<Button>();
-
-        //button.onClick.AddListener(() => OnClicked(lobby.foundLobbies[0]));
-
-        // Set button's text to friend's display name
-        button.GetComponent<FriendButton>().usernameText.text = userInfoData.DisplayName;
-
-        // Resize the content holder to allow scrolling
-        contentTransform.sizeDelta += new Vector2(0, gridLayoutGroup.cellSize.y);
-    }
-
-    #endregion
-
-    #region Epic Online Services Callbacks
-    private void OnFoundFriendsCallback(int friendCount)
-    {
-        friendsCount = friendCount;
-    }
 
     #endregion
 }
