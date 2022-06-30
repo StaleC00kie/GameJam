@@ -393,11 +393,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4d478fa420381448a7e041535606e52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lobby: {fileID: 0}
   devMode: 1
   EOSPrefab: {fileID: 775223529107561534, guid: a60782e76c98aeb4d9514ad421dbdbd7, type: 3}
   devEOSPrefab: {fileID: 1395638532071860818, guid: 5e6f9e0971595274597d02b3756b30cc, type: 3}
   roomManagerPrefab: {fileID: 1486577585132104392, guid: e10fd083f8f2669459e6a38f2daecd0b, type: 3}
-  devName: Dev1
+  devName: Dev0
 --- !u!4 &644617489
 Transform:
   m_ObjectHideFlags: 0
@@ -1273,7 +1274,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 698641217}
   m_HandleRect: {fileID: 698641216}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:

@@ -25,6 +25,7 @@ public class Lobby : EOSLobby
 
     #endregion
 
+
     #region Mono Behaviour Methods
     private void Awake()
     {
@@ -74,6 +75,8 @@ public class Lobby : EOSLobby
         lobbyData = attributes;
         Debug.Log("Created Lobby Successfully");
         networkRoomManager.StartHost();
+
+        LobbyManager.Instance.GenerateButtons();
     }
 
     private void OnJoinLobbySuccess(List<Attribute> attributes)
@@ -83,7 +86,7 @@ public class Lobby : EOSLobby
         networkRoomManager.StartClient();
     }
 
-    private void OnFindLobbiesSuccess(List<LobbyDetails> lobbiesFound)
+    public void OnFindLobbiesSuccess(List<LobbyDetails> lobbiesFound)
     {
         foundLobbies = lobbiesFound;
     }

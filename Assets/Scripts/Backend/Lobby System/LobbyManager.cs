@@ -6,6 +6,18 @@ using Epic.OnlineServices.Lobby;
 using Mirror;
 public class LobbyManager : MonoBehaviour
 {
+    #region Public Static Fields
+
+    public static LobbyManager Instance;
+
+    #endregion
+
+    #region Public Fields
+
+    public Lobby lobby;
+
+    #endregion
+
     #region SerializeFields
 
     [SerializeField]
@@ -31,13 +43,22 @@ public class LobbyManager : MonoBehaviour
 
     private EOSSDKComponent EOS;
 
-    private Lobby lobby;
-
     #endregion
 
     #region Mono Behaviours Methods
     public void Awake()
     {
+        if(Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
+
         if (Debug.isDebugBuild && devMode == true)
         {
             if(devName != string.Empty)
@@ -96,6 +117,18 @@ public class LobbyManager : MonoBehaviour
         {
             Debug.Log("Not ready");
         }
+    }
+
+    public void GenerateButtons()
+    {
+        var generateFriendButtons = FindObjectOfType<GenerateFriendButtons>();
+
+        generateFriendButtons.CreateButtons();
+    }
+
+    public void SearchForLobbies(int maxResults)
+    {
+        lobby.FindLobbies((uint)maxResults);
     }
 
     #endregion

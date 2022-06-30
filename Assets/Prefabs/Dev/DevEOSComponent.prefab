@@ -48,7 +48,7 @@ MonoBehaviour:
   authInterfaceLogin: 1
   authInterfaceCredentialType: 4
   devAuthToolPort: 7878
-  devAuthToolCredentialName: 
+  devAuthToolCredentialName: Dev1
   connectInterfaceCredentialType: 0
   deviceModel: PC Windows 64bit
   displayName: User
