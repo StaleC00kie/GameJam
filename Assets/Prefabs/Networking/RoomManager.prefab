@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1486577585132104397}
   - component: {fileID: 1486577585132104398}
-  - component: {fileID: 1486577585132104399}
+  - component: {fileID: 2871085330895104868}
   - component: {fileID: -256160861451048660}
   m_Layer: 0
   m_Name: RoomManager
@@ -51,7 +51,7 @@ MonoBehaviour:
   serverTickRate: 30
   offlineScene: 
   onlineScene: 
-  transport: {fileID: 1486577585132104399}
+  transport: {fileID: 2871085330895104868}
   networkAddress: localhost
   maxConnections: 4
   authenticator: {fileID: 0}
@@ -67,7 +67,7 @@ MonoBehaviour:
   _allPlayersReady: 0
   roomSlots: []
   clientIndex: 0
---- !u!114 &1486577585132104399
+--- !u!114 &2871085330895104868
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -76,14 +76,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1486577585132104392}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5f2d307354f3ea49b3ea12e6763a9fe, type: 3}
+  m_Script: {fileID: 11500000, guid: 2b60955f1c57f6048b966a6be43b10cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Channels: 0200000000000000
-  timeout: 1000
-  maxFragments: 55
-  ignoreCachedMessagesAtStartUpInSeconds: 2
-  relayControl: 1
+  Channels: 0200000001000000
+  Timeout: 600
+  SteamAppID: 480
+  AllowSteamRelay: 1
+  UseNextGenSteamNetworking: 1
+  InitFacepunch: 1
+  SteamUserID: 0
 --- !u!114 &-256160861451048660
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,5 +98,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 160ad70348c62d24a9c5999eb1e8e154, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttributeKeys:
-  - lobby_name

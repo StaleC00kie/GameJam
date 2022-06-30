@@ -4,6 +4,7 @@ using UnityEngine;
 using EpicTransport;
 using Steamworks;
 using Mirror;
+
 public class LobbyManager : MonoBehaviour
 {
     #region Public Static Fields
@@ -27,6 +28,10 @@ public class LobbyManager : MonoBehaviour
 
     private NetworkRoomManager networkRoomManager;
 
+    private GenerateFriendButtons generateFriendButtons;
+
+    private Lobby lobby;
+
     #endregion
 
     #region Mono Behaviours Methods
@@ -45,15 +50,20 @@ public class LobbyManager : MonoBehaviour
             return;
         }
 
-        try
-        {
-            SteamClient.Init(480, true);
+        //try
+        //{
+        //    SteamClient.Init(480, true);
 
-        }
-        catch (System.Exception e)
-        {
-            Debug.LogError(e.Message);
-        }
+        //}
+        //catch (System.Exception e)
+        //{
+        //    Debug.LogError(e.Message);
+        //}
+    }
+
+    public void Start()
+    {
+        InitUser();
     }
 
     public void OnApplicationQuit()
@@ -68,14 +78,28 @@ public class LobbyManager : MonoBehaviour
     public void InitUser()
     {
         networkRoomManager = Instantiate(roomManagerPrefab).GetComponent<NetworkRoomManager>();
+
+        GenerateButtons();
+
     }
 
 
     public void GenerateButtons()
     {
-        var generateFriendButtons = FindObjectOfType<GenerateFriendButtons>();
+        if(generateFriendButtons == null)
+        {
+            generateFriendButtons = FindObjectOfType<GenerateFriendButtons>();
+        }
+
+        if(lobby == null)
+        {
+            lobby = networkRoomManager.GetComponent<Lobby>();
+        }
+
+        //lobby.CreateLobby(LobbyType.Friends);
 
         generateFriendButtons.CreateButtons();
+
     }
     #endregion
 }

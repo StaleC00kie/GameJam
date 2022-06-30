@@ -32,7 +32,7 @@ public class GenerateFriendButtons : MonoBehaviour
 
     public void Start()
     {
-        CreateButtons();
+
     }
 
     #endregion
@@ -43,12 +43,12 @@ public class GenerateFriendButtons : MonoBehaviour
     {
         foreach (Friend friend in SteamFriends.GetFriends())
         {
-            if(friend.IsOnline)
+            if(friend.IsOnline && Lobby.IsFriendPlaying(friend))
             {
                 // Create a button
                 Button button = Instantiate(friendButtonPrefab, transform).GetComponent<Button>();
 
-                //button.onClick.AddListener(() => OnClicked(lobby.foundLobbies[0]));
+                button.onClick.AddListener(() => OnClicked(friend.GameInfo.Value.Lobby.Value));
 
                 // Set button's text to friend's display name
                 button.GetComponent<FriendButton>().usernameText.text = friend.Name;
@@ -59,9 +59,42 @@ public class GenerateFriendButtons : MonoBehaviour
         }
     }
 
-    public void OnClicked()
+    public async void OnClicked(Steamworks.Data.Lobby? lobbyData)
     {
-        //lobby.JoinLobby(lobbyDetails);
+        RoomEnter result = await lobbyData.Value.Join();
+
+        switch (result)
+        {
+            case RoomEnter.Success:
+                Debug.Log("Joined friend's lobby!");
+                break;
+            case RoomEnter.DoesntExist:
+                Debug.Log("Lobby does not exist!");
+                break;
+            case RoomEnter.NotAllowed:
+                break;
+            case RoomEnter.Full:
+                Debug.Log("Lobby is full!");
+                break;
+            case RoomEnter.Error:
+                break;
+            case RoomEnter.Banned:
+                break;
+            case RoomEnter.Limited:
+                break;
+            case RoomEnter.ClanDisabled:
+                break;
+            case RoomEnter.CommunityBan:
+                break;
+            case RoomEnter.MemberBlockedYou:
+                break;
+            case RoomEnter.YouBlockedMember:
+                break;
+            case RoomEnter.RatelimitExceeded:
+                break;
+            default:
+                break;
+        }
     }
 
     #endregion

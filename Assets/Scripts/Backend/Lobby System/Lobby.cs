@@ -2,26 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
-using Epic.OnlineServices.Lobby;
+using Steamworks;
 
-public class Lobby : EOSLobby
+public enum LobbyType
+{
+    Public,
+    Friends,
+    Private,
+    Invisible,
+}
+
+
+public class Lobby : MonoBehaviour
 {
     #region Public Fields
 
-    [HideInInspector]
-    public List<LobbyDetails> foundLobbies = new List<LobbyDetails>();
 
     #endregion
 
     #region Private Fields
-    private List<Attribute> lobbyData = new List<Attribute>();
 
 
     private string lobbyName = "LobbyName";
 
     private NetworkRoomManager networkRoomManager;
-
-    private bool lobbyExists;
 
     #endregion
 
@@ -32,70 +36,46 @@ public class Lobby : EOSLobby
         networkRoomManager = FindObjectOfType<NetworkRoomManager>();
     }
 
-    public override void Start()
+    public void Start()
     {
-        base.Start();
-
 
     }
 
-    public void Create()
+    public async void CreateLobby(LobbyType lobbyType)
     {
-        CreateLobby((uint)networkRoomManager.maxConnections,
-            LobbyPermissionLevel.Joinviapresence,
-            true,
-            new AttributeData[] { new AttributeData { Key = AttributeKeys[0], Value = lobbyName },
-            });
+        var lobby = await SteamMatchmaking.CreateLobbyAsync(networkRoomManager.maxConnections);
+
+        switch (lobbyType)
+        {
+            case LobbyType.Public:
+                lobby.Value.SetPublic();
+                break;
+            case LobbyType.Friends:
+                lobby.Value.SetFriendsOnly();
+                break;
+            case LobbyType.Private:
+                lobby.Value.SetPrivate();
+                break;
+            case LobbyType.Invisible:
+                lobby.Value.SetInvisible();
+                break;
+            default:
+                break;
+        }
     }
 
-    private void OnEnable()
+    public static bool IsFriendPlaying(Friend friend)
     {
-        //subscribe to events
-        CreateLobbySucceeded += OnCreateLobbySuccess;
-        JoinLobbySucceeded += OnJoinLobbySuccess;
-        FindLobbiesSucceeded += OnFindLobbiesSuccess;
-        LeaveLobbySucceeded += OnLeaveLobbySuccess;
+        bool isValid = (friend.GameInfo.HasValue ? true : false) && friend.GameInfo.Value.Lobby.HasValue ? true : false;
+        if (isValid)
+        {
+            return true; // Is in a lobby and is playing this game.
+        }
+
+        return false; // Is either not in a lobby or not playing this game.
     }
 
-    private void OnDisable()
-    {
-        //unsubscribe from events
-        CreateLobbySucceeded -= OnCreateLobbySuccess;
-        JoinLobbySucceeded -= OnJoinLobbySuccess;
-        FindLobbiesSucceeded -= OnFindLobbiesSuccess;
-        LeaveLobbySucceeded -= OnLeaveLobbySuccess;
-    }
 
     #endregion
 
-    #region Epic Online Services Callbacks
-
-    private void OnCreateLobbySuccess(List<Attribute> attributes)
-    {
-        lobbyData = attributes;
-        Debug.Log("Created Lobby Successfully");
-        networkRoomManager.StartHost();
-
-        LobbyManager.Instance.GenerateButtons();
-    }
-
-    private void OnJoinLobbySuccess(List<Attribute> attributes)
-    {
-        lobbyData = attributes;
-        networkRoomManager.networkAddress = attributes.Find((x) => x.Data.Key == hostAddressKey).Data.Value.AsUtf8;
-        networkRoomManager.StartClient();
-    }
-
-    public void OnFindLobbiesSuccess(List<LobbyDetails> lobbiesFound)
-    {
-        foundLobbies = lobbiesFound;
-    }
-
-    private void OnLeaveLobbySuccess()
-    {
-        networkRoomManager.StopHost();
-        networkRoomManager.StopClient();
-    }
-
-    #endregion
 }
