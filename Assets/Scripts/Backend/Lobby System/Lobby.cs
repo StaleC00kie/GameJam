@@ -27,6 +27,8 @@ public class Lobby : MonoBehaviour
 
     private NetworkRoomManager networkRoomManager;
 
+    private static IEnumerable<Friend> friends;
+
     #endregion
 
 
@@ -34,12 +36,23 @@ public class Lobby : MonoBehaviour
     private void Awake()
     {
         networkRoomManager = FindObjectOfType<NetworkRoomManager>();
+
+
     }
 
     public void Start()
     {
 
     }
+
+    public void Update()
+    {
+        
+    }
+
+    #endregion
+
+    #region Async Methods
 
     public async void CreateLobby(LobbyType lobbyType)
     {
@@ -63,6 +76,18 @@ public class Lobby : MonoBehaviour
                 break;
         }
     }
+    #endregion
+
+    #region Public Static Methods
+    public static bool HasFriendsListChanged()
+    {
+        if(SteamFriends.GetFriends() == friends)
+        {
+            return false;
+        }
+
+        return true;
+    }
 
     public static bool IsFriendPlaying(Friend friend)
     {
@@ -75,7 +100,5 @@ public class Lobby : MonoBehaviour
         return false; // Is either not in a lobby or not playing this game.
     }
 
-
     #endregion
-
 }
