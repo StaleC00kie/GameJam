@@ -20,7 +20,7 @@ public class GenerateFriendButtons : MonoBehaviour
 
     private RectTransform contentTransform;
 
-    private List<Button> buttons;
+    private List<Button> buttons = new List<Button>();
 
     private List<Friend> friends;
 
