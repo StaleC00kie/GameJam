@@ -16,22 +16,22 @@ public class GenerateFriendButtons : MonoBehaviour
 
     #region Private Fields
 
-    private GridLayoutGroup gridLayoutGroup;
+    private GridLayoutGroup _gridLayoutGroup;
 
-    private RectTransform contentTransform;
+    private RectTransform _contentTransform;
 
-    private List<Button> buttons = new List<Button>();
+    private List<Button> _buttons = new List<Button>();
 
-    private List<Friend> friends;
+    private List<Friend> _friends;
 
     #endregion
 
     #region Mono Behaviour Methods
     private void Awake()
     {
-        gridLayoutGroup = GetComponent<GridLayoutGroup>();
+        _gridLayoutGroup = GetComponent<GridLayoutGroup>();
 
-        contentTransform = GetComponent<RectTransform>();
+        _contentTransform = GetComponent<RectTransform>();
     }
 
     public void Start()
@@ -53,7 +53,7 @@ public class GenerateFriendButtons : MonoBehaviour
     #region Public Methods
 
     /// <summary>
-    /// Instantiates buttons for each friend and sets the button's text to the friends username.
+    /// Instantiates _buttons for each friend and sets the button's text to the _friends username.
     /// </summary>
     public void CreateButtons()
     {
@@ -71,10 +71,10 @@ public class GenerateFriendButtons : MonoBehaviour
                 button.GetComponent<FriendButton>().usernameText.text = friend.Name;
                 
                 // Cache button for future use (clearing the buttons).
-                buttons.Add(button);
+                _buttons.Add(button);
 
                 // Resize the content holder to allow scrolling.
-                contentTransform.sizeDelta += new Vector2(0, gridLayoutGroup.cellSize.y);
+                _contentTransform.sizeDelta += new Vector2(0, _gridLayoutGroup.cellSize.y);
             }
         }
     }
@@ -97,26 +97,26 @@ public class GenerateFriendButtons : MonoBehaviour
             button.GetComponent<FriendButton>().usernameText.text = friend.Name;
 
             // Cache button for future use (clearing the buttons).
-            buttons.Add(button);
+            _buttons.Add(button);
 
             // Resize the content holder to allow scrolling.
-            contentTransform.sizeDelta += new Vector2(0, gridLayoutGroup.cellSize.y);
+            _contentTransform.sizeDelta += new Vector2(0, _gridLayoutGroup.cellSize.y);
         }
     }
 
     /// <summary>
-    /// Removes all buttons from the user's friends list.
+    /// Removes all _buttons from the user's friends list.
     /// </summary>
     public void ClearButtons()
     {
-        for (int i = 0; i < buttons.Count; i++)
+        for (int i = 0; i < _buttons.Count; i++)
         {
-            buttons[i].onClick.RemoveAllListeners();
+            _buttons[i].onClick.RemoveAllListeners();
             
-            Destroy(buttons[i]);
+            Destroy(_buttons[i]);
         }
 
-        buttons.Clear();
+        _buttons.Clear();
     }
     
     /// <summary>
@@ -124,14 +124,14 @@ public class GenerateFriendButtons : MonoBehaviour
     /// </summary>
     public void UpdateFriendList()
     {
-        if(friends == null)
+        if(_friends == null)
         {
             return;
         }
 
         foreach (Friend friend in SteamFriends.GetFriends())
         {
-            if (friends.Contains(friend) == false)
+            if (_friends.Contains(friend) == false)
             {
                 CreateFriendButton(friend);
             }

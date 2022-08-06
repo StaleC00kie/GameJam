@@ -152,7 +152,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4d478fa420381448a7e041535606e52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomManagerPrefab: {fileID: 1486577585132104392, guid: e10fd083f8f2669459e6a38f2daecd0b, type: 3}
 --- !u!4 &644617489
 Transform:
   m_ObjectHideFlags: 0
@@ -376,7 +375,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1295283809}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 644617488}
+        m_TargetAssemblyTypeName: LobbyManager, Assembly-CSharp
+        m_MethodName: OnReadyClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1295283809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -490,6 +501,83 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1303697399}
   m_CullTransparentMesh: 1
+--- !u!1001 &1395372756
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1486577585132104392, guid: e10fd083f8f2669459e6a38f2daecd0b, type: 3}
+      propertyPath: m_Name
+      value: RoomManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 1486577585132104397, guid: e10fd083f8f2669459e6a38f2daecd0b, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1486577585132104397, guid: e10fd083f8f2669459e6a38f2daecd0b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 597.5297
+      objectReference: {fileID: 0}
+    - target: {fileID: 1486577585132104397, guid: e10fd083f8f2669459e6a38f2daecd0b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 341.5824
+      objectReference: {fileID: 0}
+    - target: {fileID: 1486577585132104397, guid: e10fd083f8f2669459e6a38f2daecd0b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 36.100464
+      objectReference: {fileID: 0}
+    - target: {fileID: 1486577585132104397, guid: e10fd083f8f2669459e6a38f2daecd0b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1486577585132104397, guid: e10fd083f8f2669459e6a38f2daecd0b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1486577585132104397, guid: e10fd083f8f2669459e6a38f2daecd0b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1486577585132104397, guid: e10fd083f8f2669459e6a38f2daecd0b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1486577585132104397, guid: e10fd083f8f2669459e6a38f2daecd0b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1486577585132104397, guid: e10fd083f8f2669459e6a38f2daecd0b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1486577585132104397, guid: e10fd083f8f2669459e6a38f2daecd0b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1486577585132104398, guid: e10fd083f8f2669459e6a38f2daecd0b, type: 3}
+      propertyPath: playerPrefab
+      value: 
+      objectReference: {fileID: 6367444864447583851, guid: 0ac0a5e03b1588b42a01c84e173859a1, type: 3}
+    - target: {fileID: 1486577585132104398, guid: e10fd083f8f2669459e6a38f2daecd0b, type: 3}
+      propertyPath: GameplayScene
+      value: Assets/Scenes/DevScene.unity
+      objectReference: {fileID: 0}
+    - target: {fileID: 1486577585132104398, guid: e10fd083f8f2669459e6a38f2daecd0b, type: 3}
+      propertyPath: roomPlayerPrefab
+      value: 
+      objectReference: {fileID: 5110565199853904549, guid: 11b933f0bbc77e149bede115662278b4, type: 3}
+    - target: {fileID: 1486577585132104398, guid: e10fd083f8f2669459e6a38f2daecd0b, type: 3}
+      propertyPath: roomSlots.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2871085330895104868, guid: e10fd083f8f2669459e6a38f2daecd0b, type: 3}
+      propertyPath: InitFacepunch
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e10fd083f8f2669459e6a38f2daecd0b, type: 3}
 --- !u!1 &1687258581
 GameObject:
   m_ObjectHideFlags: 0
@@ -501,7 +589,6 @@ GameObject:
   - component: {fileID: 1687258585}
   - component: {fileID: 1687258584}
   - component: {fileID: 1687258582}
-  - component: {fileID: 1687258583}
   - component: {fileID: 1687258586}
   m_Layer: 0
   m_Name: Main Camera
@@ -518,46 +605,6 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1687258581}
   m_Enabled: 1
---- !u!114 &1687258583
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1687258581}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be76e5f14cfee674cb30b491fb72b09b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  boost: 3.5
-  positionLerpTime: 0.2
-  mouseSensitivityCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0.5
-      inSlope: 0
-      outSlope: 5
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 2.5
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  rotationLerpTime: 0.01
-  invertY: 0
 --- !u!20 &1687258584
 Camera:
   m_ObjectHideFlags: 0
@@ -659,7 +706,7 @@ GameObject:
   - component: {fileID: 1995745939}
   - component: {fileID: 1995745938}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: ReadyPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -777,7 +824,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96

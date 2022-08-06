@@ -36,8 +36,6 @@ public class Lobby : MonoBehaviour
     private void Awake()
     {
         networkRoomManager = FindObjectOfType<NetworkRoomManager>();
-
-
     }
 
     public void Start()
@@ -65,6 +63,7 @@ public class Lobby : MonoBehaviour
                 break;
             case LobbyType.Friends:
                 lobby.Value.SetFriendsOnly();
+                Debug.Log("Created Friends Only Lobby");
                 break;
             case LobbyType.Private:
                 lobby.Value.SetPrivate();
@@ -91,7 +90,7 @@ public class Lobby : MonoBehaviour
 
     public static bool IsFriendPlaying(Friend friend)
     {
-        bool isValid = (friend.GameInfo.HasValue ? true : false) && (friend.GameInfo.Value.Lobby.HasValue ? true : false) && friend.IsPlayingThisGame;
+        bool isValid = (friend.GameInfo.HasValue && friend.GameInfo.Value.Lobby.HasValue && friend.IsPlayingThisGame);
         if (isValid)
         {
             return true; // Is in a lobby and is playing this game.

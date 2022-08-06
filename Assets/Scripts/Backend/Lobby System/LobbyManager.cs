@@ -19,9 +19,6 @@ public class LobbyManager : MonoBehaviour
 
     #region SerializeFields
 
-    [SerializeField]
-    private GameObject roomManagerPrefab;
-
     #endregion
 
     #region Private Fields
@@ -49,21 +46,23 @@ public class LobbyManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
-        //try
-        //{
-        //    SteamClient.Init(480, true);
-
-        //}
-        //catch (System.Exception e)
-        //{
-        //    Debug.LogError(e.Message);
-        //}
     }
 
     public void Start()
     {
+        try
+        {
+            SteamClient.Init(480, true);
+
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError(e.Message);
+        }
+
         InitUser();
+
+
     }
 
     public void OnApplicationQuit()
@@ -73,16 +72,23 @@ public class LobbyManager : MonoBehaviour
 
     #endregion
 
-    #region Public Methods
-
-    public void InitUser()
+    #region Private Methods
+    private void InitUser()
     {
-        networkRoomManager = Instantiate(roomManagerPrefab).GetComponent<NetworkRoomManager>();
+        networkRoomManager = FindObjectOfType<NetworkRoomManager>();
 
         GenerateButtons();
-
+        SpawnInRoomPlayer();
     }
 
+    private void SpawnInRoomPlayer()
+    {
+
+    }
+    #endregion
+
+
+    #region Public Methods
 
     public void GenerateButtons()
     {
@@ -96,10 +102,18 @@ public class LobbyManager : MonoBehaviour
             lobby = networkRoomManager.GetComponent<Lobby>();
         }
 
-        //lobby.CreateLobby(LobbyType.Friends);
+        networkRoomManager.StartHost();
+
+        lobby.CreateLobby(LobbyType.Friends);
 
         generateFriendButtons.CreateButtons();
 
     }
+
+    public void OnReadyClicked()
+    {
+
+    }
+
     #endregion
 }
